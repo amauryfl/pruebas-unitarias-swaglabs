@@ -23,4 +23,6 @@ No se trata de una campaña exhaustiva de mutaciones: son dos comprobaciones dir
 
 ## Estado de entrega
 
-Código, pruebas, documentación y evidencias publicados en https://github.com/amauryfl/pruebas-unitarias-swaglabs (rama main). El informe Word y la demostración en video se encuentran en entrega/.
+Código, pruebas, documentación, evidencias, informe Word y video publicados en https://github.com/amauryfl/pruebas-unitarias-swaglabs (rama main). Los archivos de entrega se encuentran en entrega/.
+
+La descarga independiente del commit 377b71bf36f30ed1daac148707bbff38a7e33811 desde GitHub aprobó las 32 pruebas, mantuvo 100 % de cobertura de las 56 sentencias y 14 ramas y detectó M01 y M02. Esta verificación se conserva en evidencias/publicacion_github.json y evidencias/pytest_desde_github.txt. El documento y el video se añadieron posteriormente sin modificar el código probado.

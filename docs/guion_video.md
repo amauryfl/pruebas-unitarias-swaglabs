@@ -68,9 +68,9 @@ En M cero dos se omitió la validación del apellido. Q cero cinco falló porque
 
 Fuente en pantalla: EXTRACTO REAL · evidencias/M02_fallo_detectado.txt.
 
-## 12. Cómo revisar y publicar el proyecto
+## 12. Cómo revisar el repositorio publicado
 
-Para reproducir el trabajo, se crea un entorno de Python tres punto doce, se instalan las versiones fijadas y se ejecutan los dos scripts. La documentación relaciona cada escenario con su caso de uso. El historial local de Git está incluido. La publicación remota requiere el repositorio del estudiante y debe verificarse antes de entregar.
+El proyecto está publicado en GitHub. Se descargó una copia independiente y las treinta y dos pruebas volvieron a aprobar, con cobertura completa del módulo y los dos fallos controlados detectados. Para revisarlo, se instalan las versiones fijadas y se ejecutan los dos scripts. La carpeta entrega contiene el informe y este video. La matriz documenta el propósito de cada prueba y su caso de uso.
 
 Fuente en pantalla: REPRODUCCIÓN · DOCUMENTACIÓN · GIT.
 

@@ -74,6 +74,8 @@ Este último comando crea copias temporales. En ellas se espera que una prueba f
 | `evidencias/mutaciones.json` | Resultado de las dos alteraciones controladas |
 | `evidencias/M01_fallo_detectado.txt` | Fallo real al impedir que Remove elimine el artículo |
 | `evidencias/M02_fallo_detectado.txt` | Fallo real al omitir la validación del apellido |
+| `evidencias/publicacion_github.json` | Commit descargado de GitHub, entorno y verificación independiente |
+| `evidencias/pytest_desde_github.txt` | Salida original de las 32 pruebas ejecutadas desde esa descarga |
 
 El umbral de cobertura es 100 % para las dos unidades pequeñas definidas en este proyecto. La cobertura se calcula sobre `swaglab/`; no representa cobertura del sitio público, de la interfaz ni de todos los posibles datos de entrada.
 
