@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.7.0 -- /workspace/scratch/792c51657c83/tmp/unitarias_env/bin/python
+cachedir: .pytest_cache
+rootdir: /tmp/swaglab_mutation_6ak8_1wl
+configfile: pyproject.toml
+collecting ... collected 1 item
+
+tests/test_cart.py::test_C05_remove_last_product FAILED                  [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_C05_remove_last_product _________________________
+
+cart = <swaglab.cart.Cart object at 0x7f866c6d0410>
+
+    def test_C05_remove_last_product(cart):
+        """C05: retirar el último producto deja contador y subtotal en cero."""
+        cart.add("backpack")
+        removed = cart.remove("backpack")
+        assert removed is True
+>       assert cart.items == ()
+E       AssertionError: assert (Product(id='...al('29.99')),) == ()
+E         
+E         Left contains one more item: Product(id='backpack', name='Sauce Labs Backpack', price=Decimal('29.99'))
+E         
+E         Full diff:
+E         - ()
+E         + (
+E         +     Product(...
+E         
+E         ...Full output truncated (5 lines hidden), use '-vv' to show
+
+tests/test_cart.py:51: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_cart.py::test_C05_remove_last_product - AssertionError: ass...
+============================== 1 failed in 0.03s ===============================

@@ -1,0 +1,50 @@
+{
+  "started_utc": "2026-10-22T14:14:02.611747+00:00",
+  "finished_utc": "2026-10-22T14:14:02.998946+00:00",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "-v",
+    "-p",
+    "pytest_cov",
+    "--color=no",
+    "--cov=swaglab",
+    "--cov-branch",
+    "--cov-report=term-missing",
+    "--cov-report=json:evidencias/coverage.json",
+    "--cov-report=html:evidencias/coverage_html",
+    "--junitxml=evidencias/junit.xml"
+  ],
+  "exit_code": 0,
+  "files_sha256": {
+    "swaglab/__init__.py": "6588e7811d40c77e3f2e38f489bb852db5e755314c17947254191eaa948a3923",
+    "swaglab/cart.py": "2a37384125db09bf79b771de2b0652119941639081f3adb937d58779403a80a5",
+    "swaglab/checkout.py": "ac36ece3a9e34434566224aa1b7d838921f44b526f247b61483296cf68c9e25b",
+    "tests/conftest.py": "a2bd27f9fbfa61c21ff6ee5f42f6db463507294989b640acfb5b4433ccbe9bfa",
+    "tests/test_cart.py": "6e83cae7be7b97ce310f6e27560d2a7a0659adee0a4b3ce84ca5cb3150314b90",
+    "tests/test_checkout.py": "b17ebb79766320a8605badb6a87b2f4bdf202223339304f70ff8ad3480d4c5a5"
+  },
+  "tests": 32,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "coverage": {
+    "covered_lines": 56,
+    "num_statements": 56,
+    "percent_covered": 100.0,
+    "percent_covered_display": "100.00",
+    "missing_lines": 0,
+    "excluded_lines": 0,
+    "percent_statements_covered": 100.0,
+    "percent_statements_covered_display": "100.00",
+    "num_branches": 14,
+    "num_partial_branches": 0,
+    "covered_branches": 14,
+    "missing_branches": 0,
+    "percent_branches_covered": 100.0,
+    "percent_branches_covered_display": "100.00"
+  }
+}

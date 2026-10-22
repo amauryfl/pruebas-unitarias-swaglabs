@@ -1,0 +1,36 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.7.0 -- /workspace/scratch/792c51657c83/tmp/unitarias_env/bin/python
+cachedir: .pytest_cache
+rootdir: /tmp/swaglab_mutation_yytbgps1
+configfile: pyproject.toml
+collecting ... collected 1 item
+
+tests/test_checkout.py::test_required_fields_decision_table[Q05_101] FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________ test_required_fields_decision_table[Q05_101] _________________
+
+first = 'Amaury', last = '', postal = '10000', message = 'Last Name is required'
+
+    @pytest.mark.parametrize(
+        "first,last,postal,message",
+        [
+            pytest.param("", "Leonardo", "10000", "First Name is required", id="Q04_011"),
+            pytest.param("Amaury", "", "10000", "Last Name is required", id="Q05_101"),
+            pytest.param("Amaury", "Leonardo", "", "Postal Code is required", id="Q06_110"),
+            pytest.param("", "", "10000", "First Name is required", id="Q07_001"),
+            pytest.param("", "Leonardo", "", "First Name is required", id="Q08_010"),
+            pytest.param("Amaury", "", "", "Last Name is required", id="Q09_100"),
+            pytest.param("", "", "", "First Name is required", id="Q10_000"),
+        ],
+    )
+    def test_required_fields_decision_table(first, last, postal, message):
+        """Q04-Q10: se cubren las siete combinaciones inválidas y el orden del error."""
+>       with pytest.raises(ValueError) as caught:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_checkout.py:42: Failed
+=========================== short test summary info ============================
+FAILED tests/test_checkout.py::test_required_fields_decision_table[Q05_101]
+============================== 1 failed in 0.03s ===============================

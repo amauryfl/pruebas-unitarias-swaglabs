@@ -1,0 +1,22 @@
+[
+  {
+    "id": "M01",
+    "description": "Remove deja el producto en el carrito",
+    "file": "swaglab/cart.py",
+    "original": "del self._items[product_id]",
+    "replacement": "self._items.get(product_id)",
+    "test": "tests/test_cart.py::test_C05_remove_last_product",
+    "exit_code": 1,
+    "detected": true
+  },
+  {
+    "id": "M02",
+    "description": "Checkout omite validar el apellido",
+    "file": "swaglab/checkout.py",
+    "original": "last = _required_text(last_name, \"Last Name\")",
+    "replacement": "last = str(last_name)",
+    "test": "tests/test_checkout.py::test_required_fields_decision_table[Q05_101]",
+    "exit_code": 1,
+    "detected": true
+  }
+]

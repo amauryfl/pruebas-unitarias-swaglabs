@@ -1,0 +1,20 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers"
+markers = [
+    "cu01: administrar el carrito",
+    "cu02: validar el checkout",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["swaglab"]
+
+[tool.coverage.report]
+show_missing = true
+precision = 2
+fail_under = 100
+
+[tool.coverage.html]
+directory = "evidencias/coverage_html"
