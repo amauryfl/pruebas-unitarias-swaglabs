@@ -1,0 +1,1205 @@
+{
+  "cases": [
+    {
+      "id": "C01",
+      "caso": "CU01",
+      "reglas": "R01",
+      "proposito": "Estado inicial",
+      "datos": "Cart() con catálogo predeterminado.",
+      "esperado": "Sin artículos; count = 0; subtotal = Decimal(\"0.00\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C01_new_cart_is_empty",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito nuevo.",
+        "Consultar items, count y subtotal."
+      ],
+      "tecnica": "Partición válida del estado inicial",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: Sin artículos; count = 0; subtotal = Decimal(\"0.00\")."
+    },
+    {
+      "id": "C02",
+      "caso": "CU01",
+      "reglas": "R02, R07",
+      "proposito": "Agregar producto válido",
+      "datos": "product_id = \"backpack\"; precio = Decimal(\"29.99\").",
+      "esperado": "Retorno True; Product(\"backpack\", \"Sauce Labs Backpack\", Decimal(\"29.99\")); count = 1; subtotal = Decimal(\"29.99\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C02_add_known_product",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito nuevo.",
+        "Ejecutar add(\"backpack\") y guardar el retorno.",
+        "Consultar producto, contador y subtotal."
+      ],
+      "tecnica": "Partición de equivalencia válida",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: Retorno True; Product(\"backpack\", \"Sauce Labs Backpack\", Decimal(\"29.99\")); count = 1; subtotal = Decimal(\"29.99\")."
+    },
+    {
+      "id": "C03",
+      "caso": "CU01",
+      "reglas": "R02",
+      "proposito": "Evitar duplicados",
+      "datos": "product_id = \"backpack\", agregado dos veces.",
+      "esperado": "Segundo retorno False; count = 1; subtotal = Decimal(\"29.99\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C03_duplicate_add_is_idempotent",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito y agregar \"backpack\".",
+        "Repetir add(\"backpack\") y guardar el retorno.",
+        "Consultar contador y subtotal."
+      ],
+      "tecnica": "Transición de estado e idempotencia",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: Segundo retorno False; count = 1; subtotal = Decimal(\"29.99\")."
+    },
+    {
+      "id": "C04",
+      "caso": "CU01",
+      "reglas": "R02, R07",
+      "proposito": "Sumar productos distintos",
+      "datos": "IDs = \"backpack\", \"jacket\"; precios 29.99 y 49.99.",
+      "esperado": "IDs = {\"backpack\", \"jacket\"}; count = 2; subtotal = Decimal(\"79.98\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C04_add_two_distinct_products",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito nuevo.",
+        "Agregar \"backpack\" y después \"jacket\".",
+        "Consultar identificadores, contador y subtotal."
+      ],
+      "tecnica": "Combinación válida de productos",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: IDs = {\"backpack\", \"jacket\"}; count = 2; subtotal = Decimal(\"79.98\")."
+    },
+    {
+      "id": "C05",
+      "caso": "CU01",
+      "reglas": "R04, R05",
+      "proposito": "Retirar el último producto",
+      "datos": "product_id = \"backpack\".",
+      "esperado": "Retorno True; items = (); count = 0; subtotal = Decimal(\"0.00\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C05_remove_last_product",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito y agregar \"backpack\".",
+        "Ejecutar remove(\"backpack\") y guardar el retorno.",
+        "Consultar items, count y subtotal."
+      ],
+      "tecnica": "Transición de lleno a vacío",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: Retorno True; items = (); count = 0; subtotal = Decimal(\"0.00\")."
+    },
+    {
+      "id": "C06",
+      "caso": "CU01",
+      "reglas": "R04, R07",
+      "proposito": "Conservar otros artículos",
+      "datos": "Agregar \"backpack\" y \"jacket\"; retirar \"backpack\".",
+      "esperado": "IDs = [\"jacket\"]; count = 1; subtotal = Decimal(\"49.99\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C06_remove_preserves_other_product",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito y agregar ambos productos.",
+        "Ejecutar remove(\"backpack\").",
+        "Consultar identificadores, contador y subtotal."
+      ],
+      "tecnica": "Transición que conserva otros productos",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: IDs = [\"jacket\"]; count = 1; subtotal = Decimal(\"49.99\")."
+    },
+    {
+      "id": "C07",
+      "caso": "CU01",
+      "reglas": "R04",
+      "proposito": "Retirar un producto ausente",
+      "datos": "Agregar \"backpack\"; retirar \"missing\".",
+      "esperado": "Retorno False; estado idéntico al previo, con mochila, count = 1 y subtotal = Decimal(\"29.99\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C07_remove_missing_product_preserves_state",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito con \"backpack\" y guardar su estado.",
+        "Ejecutar remove(\"missing\").",
+        "Comparar retorno, contenido, contador y subtotal con el estado previo."
+      ],
+      "tecnica": "Partición de identificador ausente",
+      "prioridad": "Media",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: Retorno False; estado idéntico al previo, con mochila, count = 1 y subtotal = Decimal(\"29.99\")."
+    },
+    {
+      "id": "C08",
+      "caso": "CU01",
+      "reglas": "R03",
+      "proposito": "Rechazar producto desconocido",
+      "datos": "Agregar \"backpack\"; después add(\"missing\").",
+      "esperado": "KeyError con texto \"Unknown product: missing\"; estado previo intacto.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C08_unknown_product_is_rejected",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito con \"backpack\" y guardar su estado.",
+        "Intentar agregar \"missing\" y capturar la excepción.",
+        "Comprobar tipo, texto del error y conservación del estado."
+      ],
+      "tecnica": "Partición de identificador inválido",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: KeyError con texto \"Unknown product: missing\"; estado previo intacto."
+    },
+    {
+      "id": "C09",
+      "caso": "CU01",
+      "reglas": "R06",
+      "proposito": "Aislar compradores",
+      "datos": "Dos instancias independientes: Cart() y Cart().",
+      "esperado": "El segundo carrito tiene items = (), count = 0 y subtotal = Decimal(\"0.00\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C09_cart_instances_are_isolated",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear dos carritos vacíos.",
+        "Agregar \"backpack\" únicamente al primero.",
+        "Consultar items, count y subtotal del segundo."
+      ],
+      "tecnica": "Aislamiento de estados",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: El segundo carrito tiene items = (), count = 0 y subtotal = Decimal(\"0.00\")."
+    },
+    {
+      "id": "C10",
+      "caso": "CU01",
+      "reglas": "R07",
+      "proposito": "Conservar precisión monetaria",
+      "datos": "Catálogo propio: a = Decimal(\"0.10\"); b = Decimal(\"0.20\").",
+      "esperado": "subtotal es Decimal y vale exactamente Decimal(\"0.30\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_cart.py::test_C10_money_uses_exact_decimal_arithmetic",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Crear un carrito con los productos A y B del catálogo indicado.",
+        "Agregar \"a\" y \"b\".",
+        "Comprobar el tipo y valor exacto del subtotal."
+      ],
+      "tecnica": "Conjetura de error por precisión decimal",
+      "prioridad": "Alta",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: subtotal es Decimal y vale exactamente Decimal(\"0.30\")."
+    },
+    {
+      "id": "C11",
+      "caso": "CU01",
+      "reglas": "R01, R04",
+      "proposito": "Retirar de un carrito vacío",
+      "esperado": "Retorno False; items = (); count = 0; subtotal = Decimal(\"0.00\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_diseno_adicional.py::test_C11_remove_from_empty_cart",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "datos": "Carrito nuevo; remove(\"backpack\").",
+      "pasos": [
+        "Crear un carrito sin productos.",
+        "Ejecutar remove(\"backpack\") y guardar el retorno.",
+        "Consultar items, count y subtotal."
+      ],
+      "tecnica": "Transición sobre el estado vacío",
+      "prioridad": "Media",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: Retorno False; items = (); count = 0; subtotal = Decimal(\"0.00\")."
+    },
+    {
+      "id": "C12",
+      "caso": "CU01",
+      "reglas": "R02, R04, R05",
+      "proposito": "Volver a agregar un producto retirado",
+      "esperado": "Último retorno True; IDs = [\"backpack\"]; count = 1; subtotal = Decimal(\"29.99\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_diseno_adicional.py::test_C12_readd_after_removal",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "datos": "Secuencia add/remove/add con ID \"backpack\".",
+      "pasos": [
+        "Crear un carrito y agregar \"backpack\".",
+        "Retirar \"backpack\" y volver a agregarlo.",
+        "Comprobar el retorno de la última alta y el estado final."
+      ],
+      "tecnica": "Transición de vacío a lleno tras una baja",
+      "prioridad": "Media",
+      "precondicion": "Módulo importable; instancia nueva de Cart por prueba. Catálogo predeterminado, salvo C10.",
+      "postcondicion": "La instancia se descarta al finalizar; ninguna prueba comparte el estado del carrito.",
+      "real": "Verificado por las aserciones de pytest: Último retorno True; IDs = [\"backpack\"]; count = 1; subtotal = Decimal(\"29.99\")."
+    },
+    {
+      "id": "Q01",
+      "caso": "CU02",
+      "reglas": "R11, R14",
+      "proposito": "Aceptar datos completos",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '10000', 1)",
+      "esperado": "Customer(\"Amaury\", \"Leonardo\", \"10000\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_Q01_complete_data_are_accepted",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Comparar los tres atributos de Customer con el resultado esperado."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se devuelve Customer sin crear una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia válida",
+      "real": "Verificado por las aserciones de pytest: Customer(\"Amaury\", \"Leonardo\", \"10000\")."
+    },
+    {
+      "id": "Q02",
+      "caso": "CU02",
+      "reglas": "R13",
+      "proposito": "Validar frontera de un carácter",
+      "datos": "validate_checkout('A', 'L', '1', 1)",
+      "esperado": "Customer(\"A\", \"L\", \"1\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_Q02_one_character_is_accepted",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Comparar los tres atributos de Customer con el resultado esperado."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se devuelve Customer sin crear una orden.",
+      "prioridad": "Media",
+      "tecnica": "Valores límite y particiones válidas e inválidas",
+      "real": "Verificado por las aserciones de pytest: Customer(\"A\", \"L\", \"1\")."
+    },
+    {
+      "id": "Q03",
+      "caso": "CU02",
+      "reglas": "R11",
+      "proposito": "Normalizar espacios laterales",
+      "datos": "validate_checkout('  Ana María  ', ' Pérez ', ' 10000 ', 1)",
+      "esperado": "Customer(\"Ana María\", \"Pérez\", \"10000\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_Q03_surrounding_spaces_are_trimmed",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Comparar los tres atributos de Customer con el resultado esperado."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se devuelve Customer sin crear una orden.",
+      "prioridad": "Media",
+      "tecnica": "Partición de equivalencia válida",
+      "real": "Verificado por las aserciones de pytest: Customer(\"Ana María\", \"Pérez\", \"10000\")."
+    },
+    {
+      "id": "Q04",
+      "caso": "CU02",
+      "reglas": "R11, R12",
+      "proposito": "Nombre obligatorio; patrón 011",
+      "datos": "validate_checkout('', 'Leonardo', '10000', 1)",
+      "esperado": "ValueError: First Name is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_required_fields_decision_table[Q04_011]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Tabla de decisión de campos obligatorios",
+      "real": "Verificado por las aserciones de pytest: ValueError: First Name is required."
+    },
+    {
+      "id": "Q05",
+      "caso": "CU02",
+      "reglas": "R11, R12",
+      "proposito": "Apellido obligatorio; patrón 101",
+      "datos": "validate_checkout('Amaury', '', '10000', 1)",
+      "esperado": "ValueError: Last Name is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_required_fields_decision_table[Q05_101]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Tabla de decisión de campos obligatorios",
+      "real": "Verificado por las aserciones de pytest: ValueError: Last Name is required."
+    },
+    {
+      "id": "Q06",
+      "caso": "CU02",
+      "reglas": "R11, R12",
+      "proposito": "Postal obligatorio; patrón 110",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '', 1)",
+      "esperado": "ValueError: Postal Code is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_required_fields_decision_table[Q06_110]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Tabla de decisión de campos obligatorios",
+      "real": "Verificado por las aserciones de pytest: ValueError: Postal Code is required."
+    },
+    {
+      "id": "Q07",
+      "caso": "CU02",
+      "reglas": "R11, R12",
+      "proposito": "Priorizar nombre; patrón 001",
+      "datos": "validate_checkout('', '', '10000', 1)",
+      "esperado": "ValueError: First Name is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_required_fields_decision_table[Q07_001]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Tabla de decisión de campos obligatorios",
+      "real": "Verificado por las aserciones de pytest: ValueError: First Name is required."
+    },
+    {
+      "id": "Q08",
+      "caso": "CU02",
+      "reglas": "R11, R12",
+      "proposito": "Priorizar nombre; patrón 010",
+      "datos": "validate_checkout('', 'Leonardo', '', 1)",
+      "esperado": "ValueError: First Name is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_required_fields_decision_table[Q08_010]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Tabla de decisión de campos obligatorios",
+      "real": "Verificado por las aserciones de pytest: ValueError: First Name is required."
+    },
+    {
+      "id": "Q09",
+      "caso": "CU02",
+      "reglas": "R11, R12",
+      "proposito": "Priorizar apellido; patrón 100",
+      "datos": "validate_checkout('Amaury', '', '', 1)",
+      "esperado": "ValueError: Last Name is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_required_fields_decision_table[Q09_100]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Tabla de decisión de campos obligatorios",
+      "real": "Verificado por las aserciones de pytest: ValueError: Last Name is required."
+    },
+    {
+      "id": "Q10",
+      "caso": "CU02",
+      "reglas": "R11, R12",
+      "proposito": "Rechazar tres vacíos; patrón 000",
+      "datos": "validate_checkout('', '', '', 1)",
+      "esperado": "ValueError: First Name is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_required_fields_decision_table[Q10_000]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Tabla de decisión de campos obligatorios",
+      "real": "Verificado por las aserciones de pytest: ValueError: First Name is required."
+    },
+    {
+      "id": "Q11",
+      "caso": "CU02",
+      "reglas": "R11",
+      "proposito": "Rechazar nombre de espacios",
+      "datos": "validate_checkout('  ', 'Leonardo', '10000', 1)",
+      "esperado": "ValueError: First Name is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_whitespace_only_is_rejected[Q11_spaces_first]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: ValueError: First Name is required."
+    },
+    {
+      "id": "Q12",
+      "caso": "CU02",
+      "reglas": "R11",
+      "proposito": "Rechazar apellido de tabulación",
+      "datos": "validate_checkout('Amaury', '\\t', '10000', 1)",
+      "esperado": "ValueError: Last Name is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_whitespace_only_is_rejected[Q12_spaces_last]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: ValueError: Last Name is required."
+    },
+    {
+      "id": "Q13",
+      "caso": "CU02",
+      "reglas": "R11",
+      "proposito": "Rechazar postal de espacios",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '\\n ', 1)",
+      "esperado": "ValueError: Postal Code is required.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_whitespace_only_is_rejected[Q13_spaces_postal]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: ValueError: Postal Code is required."
+    },
+    {
+      "id": "Q14",
+      "caso": "CU02",
+      "reglas": "R10",
+      "proposito": "Rechazar nombre no textual",
+      "datos": "validate_checkout(None, 'Leonardo', '10000', 1)",
+      "esperado": "TypeError: First Name must be text.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_non_text_fields_are_rejected[Q14_type_first]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: TypeError: First Name must be text."
+    },
+    {
+      "id": "Q15",
+      "caso": "CU02",
+      "reglas": "R10",
+      "proposito": "Rechazar apellido no textual",
+      "datos": "validate_checkout('Amaury', [], '10000', 1)",
+      "esperado": "TypeError: Last Name must be text.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_non_text_fields_are_rejected[Q15_type_last]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: TypeError: Last Name must be text."
+    },
+    {
+      "id": "Q16",
+      "caso": "CU02",
+      "reglas": "R10",
+      "proposito": "Rechazar postal numérico",
+      "datos": "validate_checkout('Amaury', 'Leonardo', 10000, 1)",
+      "esperado": "TypeError: Postal Code must be text.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_non_text_fields_are_rejected[Q16_type_postal]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: TypeError: Postal Code must be text."
+    },
+    {
+      "id": "Q17",
+      "caso": "CU02",
+      "reglas": "R08",
+      "proposito": "Rechazar carrito vacío",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '10000', 0)",
+      "esperado": "ValueError: Cart must contain at least one product.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_invalid_item_count_is_rejected[Q17_zero]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Valores límite y particiones válidas e inválidas",
+      "real": "Verificado por las aserciones de pytest: ValueError: Cart must contain at least one product."
+    },
+    {
+      "id": "Q18",
+      "caso": "CU02",
+      "reglas": "R08",
+      "proposito": "Rechazar cantidad negativa",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '10000', -1)",
+      "esperado": "ValueError: Cart must contain at least one product.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_invalid_item_count_is_rejected[Q18_negative]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Valores límite y particiones válidas e inválidas",
+      "real": "Verificado por las aserciones de pytest: ValueError: Cart must contain at least one product."
+    },
+    {
+      "id": "Q19",
+      "caso": "CU02",
+      "reglas": "R09",
+      "proposito": "Rechazar booleano",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '10000', True)",
+      "esperado": "TypeError: Item count must be an integer.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_invalid_item_count_is_rejected[Q19_boolean]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: TypeError: Item count must be an integer."
+    },
+    {
+      "id": "Q20",
+      "caso": "CU02",
+      "reglas": "R09",
+      "proposito": "Rechazar cantidad textual",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '10000', '1')",
+      "esperado": "TypeError: Item count must be an integer.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_invalid_item_count_is_rejected[Q20_text]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: TypeError: Item count must be an integer."
+    },
+    {
+      "id": "Q21",
+      "caso": "CU02",
+      "reglas": "R09",
+      "proposito": "Rechazar cantidad decimal",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '10000', 1.0)",
+      "esperado": "TypeError: Item count must be an integer.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_invalid_item_count_is_rejected[Q21_float]",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Partición de equivalencia inválida",
+      "real": "Verificado por las aserciones de pytest: TypeError: Item count must be an integer."
+    },
+    {
+      "id": "Q22",
+      "caso": "CU02",
+      "reglas": "R08, R14",
+      "proposito": "Aceptar varios artículos",
+      "datos": "validate_checkout('Amaury', 'Leonardo', '10000', 2)",
+      "esperado": "Customer(\"Amaury\", \"Leonardo\", \"10000\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_checkout.py::test_Q22_multiple_products_are_accepted",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Comparar los tres atributos de Customer con el resultado esperado."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se devuelve Customer sin crear una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Valores límite y particiones válidas e inválidas",
+      "real": "Verificado por las aserciones de pytest: Customer(\"Amaury\", \"Leonardo\", \"10000\")."
+    },
+    {
+      "id": "Q23",
+      "caso": "CU02",
+      "reglas": "R08, R12",
+      "proposito": "Priorizar el error de cantidad",
+      "esperado": "ValueError: Cart must contain at least one product.",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_diseno_adicional.py::test_Q23_quantity_error_has_priority",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "datos": "validate_checkout('', '', '', 0)",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Capturar la excepción y comparar su tipo y mensaje exacto."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se rechaza la entrada con la excepción indicada; no se devuelve Customer ni se crea una orden.",
+      "prioridad": "Alta",
+      "tecnica": "Tabla de decisión y prioridad de errores",
+      "real": "Verificado por las aserciones de pytest: ValueError: Cart must contain at least one product."
+    },
+    {
+      "id": "Q24",
+      "caso": "CU02",
+      "reglas": "R10, R14",
+      "proposito": "Conservar los ceros del código postal",
+      "esperado": "Customer(\"Ana\", \"Pérez\", \"00100\").",
+      "resultado": "APROBADA",
+      "fecha": "2026-10-23T18:31:45.631368+00:00",
+      "entorno": "Python 3.12.14; pytest 9.1.1; Linux x86_64; ejecución local aislada.",
+      "evidencia": "tests/test_diseno_adicional.py::test_Q24_postal_leading_zeros_are_preserved",
+      "defecto": "Ninguno detectado en esta ejecución.",
+      "datos": "validate_checkout('Ana', 'Pérez', '00100', 1)",
+      "pasos": [
+        "Preparar los cuatro argumentos exactamente como aparecen en Datos.",
+        "Invocar validate_checkout con esos argumentos.",
+        "Comparar los tres atributos de Customer con el resultado esperado."
+      ],
+      "precondicion": "Función y clase Customer importables. Cantidad recibida como argumento; sin sesión web ni base de datos.",
+      "postcondicion": "Se devuelve Customer sin crear una orden.",
+      "prioridad": "Media",
+      "tecnica": "Conjetura de error por conversión del código postal",
+      "real": "Verificado por las aserciones de pytest: Customer(\"Ana\", \"Pérez\", \"00100\")."
+    }
+  ],
+  "trace": [
+    {
+      "id": "R01",
+      "cu": "CU01",
+      "requisito": "El carrito nuevo está vacío, con contador y subtotal en cero.",
+      "casos": "C01, C11"
+    },
+    {
+      "id": "R02",
+      "cu": "CU01",
+      "requisito": "Una unidad por ID; agregar un producto existente devuelve False sin duplicarlo.",
+      "casos": "C02, C03, C04, C12"
+    },
+    {
+      "id": "R03",
+      "cu": "CU01",
+      "requisito": "Agregar un ID fuera del catálogo produce KeyError y conserva el estado.",
+      "casos": "C08"
+    },
+    {
+      "id": "R04",
+      "cu": "CU01",
+      "requisito": "Retirar un ID presente lo elimina; retirar uno ausente devuelve False y no altera el resto.",
+      "casos": "C05, C06, C07, C11, C12"
+    },
+    {
+      "id": "R05",
+      "cu": "CU01",
+      "requisito": "Retirar el último producto deja el carrito vacío.",
+      "casos": "C05, C12"
+    },
+    {
+      "id": "R06",
+      "cu": "CU01",
+      "requisito": "Cada instancia mantiene su propio estado.",
+      "casos": "C09"
+    },
+    {
+      "id": "R07",
+      "cu": "CU01",
+      "requisito": "El subtotal usa Decimal y suma los precios exactos, sin impuestos ni descuentos.",
+      "casos": "C02, C04, C06, C10"
+    },
+    {
+      "id": "R08",
+      "cu": "CU02",
+      "requisito": "La cantidad debe ser mayor que cero.",
+      "casos": "Q17, Q18, Q22, Q23"
+    },
+    {
+      "id": "R09",
+      "cu": "CU02",
+      "requisito": "La cantidad debe ser int; bool, str y float se rechazan.",
+      "casos": "Q19, Q20, Q21"
+    },
+    {
+      "id": "R10",
+      "cu": "CU02",
+      "requisito": "Nombre, apellido y código postal deben ser texto.",
+      "casos": "Q14, Q15, Q16, Q24"
+    },
+    {
+      "id": "R11",
+      "cu": "CU02",
+      "requisito": "Los tres campos son obligatorios después de strip; se conservan los espacios internos.",
+      "casos": "Q01, Q03, Q04, Q05, Q06, Q07, Q08, Q09, Q10, Q11, Q12, Q13"
+    },
+    {
+      "id": "R12",
+      "cu": "CU02",
+      "requisito": "Se informa el primer error: cantidad, nombre, apellido y código postal, en ese orden.",
+      "casos": "Q04, Q05, Q06, Q07, Q08, Q09, Q10, Q23"
+    },
+    {
+      "id": "R13",
+      "cu": "CU02",
+      "requisito": "Un carácter no vacío se acepta; el contrato no impone formato geográfico ni longitud máxima.",
+      "casos": "Q02"
+    },
+    {
+      "id": "R14",
+      "cu": "CU02",
+      "requisito": "La validación correcta devuelve Customer con sus textos; no genera pedido ni pago.",
+      "casos": "Q01, Q22, Q24"
+    }
+  ],
+  "checklist": [
+    {
+      "id": "SQA-01",
+      "fila": 6,
+      "categoria": "Riesgos",
+      "criterio": "Riesgos registrados y priorizados",
+      "estado": "Sí",
+      "evidencia": "Matriz K01–K05, prioridad y medidas preventivas."
+    },
+    {
+      "id": "SQA-02",
+      "fila": 7,
+      "categoria": "Riesgos",
+      "criterio": "Contramedidas para evitar riesgos definidas",
+      "estado": "Sí",
+      "evidencia": "Medidas y contingencias de K01–K05."
+    },
+    {
+      "id": "SQA-03",
+      "fila": 9,
+      "categoria": "Estimación",
+      "criterio": "Tareas desglosadas en productos de trabajo",
+      "estado": "Sí",
+      "evidencia": "Plan de trabajo con seis actividades y estimación de 180 minutos."
+    },
+    {
+      "id": "SQA-04",
+      "fila": 10,
+      "categoria": "Estimación",
+      "criterio": "Estimación aprobada por el gerente",
+      "estado": "N/A",
+      "evidencia": "Actividad individual; no hay gerente designado ni aprobación docente registrada."
+    },
+    {
+      "id": "SQA-05",
+      "fila": 12,
+      "categoria": "Planificación",
+      "criterio": "Alcance y objetivos de prueba definidos",
+      "estado": "Sí",
+      "evidencia": "Plan de pruebas, objetivos y alcance de CU01 y CU02."
+    },
+    {
+      "id": "SQA-06",
+      "fila": 13,
+      "categoria": "Planificación",
+      "criterio": "Plan de pruebas documentado",
+      "estado": "Sí",
+      "evidencia": "Secciones de enfoque, recursos, riesgos y criterios del informe."
+    },
+    {
+      "id": "SQA-07",
+      "fila": 15,
+      "categoria": "Organización",
+      "criterio": "Recursos de prueba definidos",
+      "estado": "Sí",
+      "evidencia": "Python, pytest, catálogo sintético, código y archivos de evidencia."
+    },
+    {
+      "id": "SQA-08",
+      "fila": 16,
+      "categoria": "Organización",
+      "criterio": "Integrantes y roles definidos",
+      "estado": "Sí",
+      "evidencia": "Responsable académico y ejecución automatizada identificados en el plan."
+    },
+    {
+      "id": "SQA-09",
+      "fila": 18,
+      "categoria": "Seguimiento",
+      "criterio": "El responsable recopila métricas del proyecto",
+      "estado": "Sí",
+      "evidencia": "Adaptación individual: seguimiento de pruebas, resultados y cobertura."
+    },
+    {
+      "id": "SQA-10",
+      "fila": 19,
+      "categoria": "Seguimiento",
+      "criterio": "Métricas recopiladas y documentadas",
+      "estado": "Sí",
+      "evidencia": "ejecucion.json: 36 pruebas, 0 fallos, 0 errores; coverage.json: 56 líneas y 14 ramas."
+    },
+    {
+      "id": "SQA-11",
+      "fila": 21,
+      "categoria": "Incidencias",
+      "criterio": "Incidencias informadas a la junta de dirección",
+      "estado": "N/A",
+      "evidencia": "No existe junta en esta actividad individual. No se detectaron fallos funcionales en la ejecución."
+    },
+    {
+      "id": "SQA-12",
+      "fila": 22,
+      "categoria": "Incidencias",
+      "criterio": "Contramedidas de incidencias definidas y aprobadas",
+      "estado": "N/A",
+      "evidencia": "No hay incidencia funcional abierta que requiera contramedida y aprobación. Los riesgos sí tienen medidas."
+    },
+    {
+      "id": "SQA-13",
+      "fila": 24,
+      "categoria": "Informe",
+      "criterio": "Informe de pruebas documentado",
+      "estado": "Sí",
+      "evidencia": "Informe Word, fichas de casos y anexos reproducibles."
+    },
+    {
+      "id": "SQA-14",
+      "fila": 25,
+      "categoria": "Informe",
+      "criterio": "Resultados reconocidos y aprobados por el gerente",
+      "estado": "N/A",
+      "evidencia": "La evaluación docente es posterior a la entrega; no se declara aprobada."
+    },
+    {
+      "id": "SQA-15",
+      "fila": 27,
+      "categoria": "Revisión",
+      "criterio": "Revisiones y auditorías SQA documentadas",
+      "estado": "Sí",
+      "evidencia": "Registro SQA0–SQA4 como autorrevisión técnica de la actividad."
+    },
+    {
+      "id": "SQA-16",
+      "fila": 28,
+      "categoria": "Revisión",
+      "criterio": "Se realizan revisiones SQA del proceso",
+      "estado": "Sí",
+      "evidencia": "Se contrastaron las siete actividades del proceso con el plan y la ejecución."
+    },
+    {
+      "id": "SQA-17",
+      "fila": 29,
+      "categoria": "Revisión",
+      "criterio": "Se revisan los productos de trabajo",
+      "estado": "Sí",
+      "evidencia": "Se comprobaron fichas, trazabilidad, entradas, errores esperados y resultados."
+    },
+    {
+      "id": "SQA-18",
+      "fila": 30,
+      "categoria": "Revisión",
+      "criterio": "Actividades SQA informadas al gerente del proyecto",
+      "estado": "N/A",
+      "evidencia": "No hay gerente del proyecto. El informe se prepara para la evaluación del docente."
+    }
+  ],
+  "risks": [
+    [
+      "K01",
+      "Alta",
+      "Confundir el módulo académico con el sitio de Swag Labs.",
+      "Delimitar la unidad probada y excluir la interfaz web.",
+      "Reformular cualquier caso que dependa de la web."
+    ],
+    [
+      "K02",
+      "Alta",
+      "Compartir estado entre casos y ocultar fallos.",
+      "Crear una instancia limpia por caso; comprobar aislamiento en C09.",
+      "Repetir el caso con fixture nueva y revisar dependencias."
+    ],
+    [
+      "K03",
+      "Alta",
+      "Aceptar datos vacíos o tipos inválidos.",
+      "Cubrir tabla de decisión, fronteras y tipos; Q04–Q23.",
+      "Registrar defecto y bloquear cierre hasta corregirlo."
+    ],
+    [
+      "K04",
+      "Alta",
+      "Calcular importes con pérdida de precisión.",
+      "Usar Decimal y probar 0.10 + 0.20 en C10.",
+      "Comparar contra importes exactos antes de liberar."
+    ],
+    [
+      "K05",
+      "Media",
+      "Perder correspondencia entre ficha y ejecución.",
+      "ID único, nodeid, JUnit, versión y hash por archivo.",
+      "Regenerar evidencias tras un cambio y actualizar las fichas."
+    ]
+  ],
+  "schedule": [
+    [
+      "Análisis",
+      "Revisar recursos y contrato de CU01 y CU02",
+      25
+    ],
+    [
+      "Planificación",
+      "Fijar alcance, recursos, riesgos y criterios",
+      20
+    ],
+    [
+      "Diseño",
+      "Definir datos, técnicas, pasos y resultados esperados",
+      60
+    ],
+    [
+      "Implementación",
+      "Preparar fixtures y completar casos de revisión",
+      25
+    ],
+    [
+      "Ejecución",
+      "Ejecutar, comparar resultados y conservar evidencias",
+      15
+    ],
+    [
+      "Cierre",
+      "Revisar checklist, trazabilidad e informe",
+      35
+    ]
+  ],
+  "run": {
+    "started_utc": "2026-10-23T18:31:45.631368+00:00",
+    "finished_utc": "2026-10-23T18:31:46.049979+00:00",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-v",
+      "-p",
+      "pytest_cov",
+      "--color=no",
+      "--cov=swaglab",
+      "--cov-branch",
+      "--cov-report=term-missing",
+      "--cov-report=json:evidencias/coverage.json",
+      "--cov-report=html:evidencias/coverage_html",
+      "--junitxml=evidencias/junit.xml"
+    ],
+    "exit_code": 0,
+    "files_sha256": {
+      "swaglab/__init__.py": "6588e7811d40c77e3f2e38f489bb852db5e755314c17947254191eaa948a3923",
+      "swaglab/cart.py": "2a37384125db09bf79b771de2b0652119941639081f3adb937d58779403a80a5",
+      "swaglab/checkout.py": "ac36ece3a9e34434566224aa1b7d838921f44b526f247b61483296cf68c9e25b",
+      "tests/conftest.py": "a2bd27f9fbfa61c21ff6ee5f42f6db463507294989b640acfb5b4433ccbe9bfa",
+      "tests/test_cart.py": "6e83cae7be7b97ce310f6e27560d2a7a0659adee0a4b3ce84ca5cb3150314b90",
+      "tests/test_checkout.py": "b17ebb79766320a8605badb6a87b2f4bdf202223339304f70ff8ad3480d4c5a5",
+      "tests/test_diseno_adicional.py": "a979d0b4e509cbb3fdb43e8ddf916e52af78de816adaf58a856494d9408a31a4"
+    },
+    "tests": 36,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "coverage": {
+      "covered_lines": 56,
+      "num_statements": 56,
+      "percent_covered": 100.0,
+      "percent_covered_display": "100.00",
+      "missing_lines": 0,
+      "excluded_lines": 0,
+      "percent_statements_covered": 100.0,
+      "percent_statements_covered_display": "100.00",
+      "num_branches": 14,
+      "num_partial_branches": 0,
+      "covered_branches": 14,
+      "missing_branches": 0,
+      "percent_branches_covered": 100.0,
+      "percent_branches_covered_display": "100.00"
+    }
+  },
+  "mutations": [
+    {
+      "id": "M01",
+      "description": "Remove deja el producto en el carrito",
+      "file": "swaglab/cart.py",
+      "original": "del self._items[product_id]",
+      "replacement": "self._items.get(product_id)",
+      "test": "tests/test_cart.py::test_C05_remove_last_product",
+      "exit_code": 1,
+      "detected": true
+    },
+    {
+      "id": "M02",
+      "description": "Checkout omite validar el apellido",
+      "file": "swaglab/checkout.py",
+      "original": "last = _required_text(last_name, \"Last Name\")",
+      "replacement": "last = str(last_name)",
+      "test": "tests/test_checkout.py::test_required_fields_decision_table[Q05_101]",
+      "exit_code": 1,
+      "detected": true
+    }
+  ]
+}

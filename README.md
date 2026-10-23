@@ -3,7 +3,7 @@
 **Amaury Francisco Leonardo · 25-1128**  
 TI3-312 Aseguramiento de la Calidad del Software · UNIBE
 
-Este proyecto implementa un módulo académico en Python inspirado en los casos de uso del carrito y checkout de Swag Labs. Incluye dos unidades de lógica de negocio y 32 pruebas con pytest. Se comprueban estados, resultados, errores esperados y aislamiento entre ejecuciones.
+Este proyecto implementa un módulo académico en Python inspirado en los casos de uso del carrito y checkout de Swag Labs. Incluye dos unidades de lógica de negocio y 36 pruebas con pytest. Se comprueban estados, resultados, errores esperados y aislamiento entre ejecuciones.
 
 La implementación probada es la que se encuentra en `swaglab/`. Es una aplicación académica independiente; los resultados no se atribuyen al código interno del sitio público saucedemo.com. Las reglas completas están en `docs/casos_de_uso.md`.
 
@@ -53,9 +53,11 @@ Este último comando crea copias temporales. En ellas se espera que una prueba f
 
 | Caso | Unidad | Archivo de pruebas | Escenarios |
 |---|---|---|---:|
-| CU01 Administrar el carrito | `Cart` | `tests/test_cart.py` | 10 |
-| CU02 Validar el checkout | `validate_checkout` | `tests/test_checkout.py` | 22 |
+| CU01 Administrar el carrito | `Cart` | `tests/test_cart.py` y dos casos en `test_diseno_adicional.py` | 12 |
+| CU02 Validar el checkout | `validate_checkout` | `tests/test_checkout.py` y dos casos en `test_diseno_adicional.py` | 24 |
 
+- `docs/unificacion.md`: relación entre laboratorios, diseño y código.
+- `docs/diseno_casos.json`: 36 fichas completas, requisitos y checklist.
 - `docs/casos_de_uso.md`: precondiciones, flujos, reglas y resultados.
 - `docs/matriz_pruebas.md`: propósito, datos y resultado esperado de cada prueba.
 - `docs/resultados.md`: resultados reales, cobertura y detección de fallos.
@@ -74,8 +76,8 @@ Este último comando crea copias temporales. En ellas se espera que una prueba f
 | `evidencias/mutaciones.json` | Resultado de las dos alteraciones controladas |
 | `evidencias/M01_fallo_detectado.txt` | Fallo real al impedir que Remove elimine el artículo |
 | `evidencias/M02_fallo_detectado.txt` | Fallo real al omitir la validación del apellido |
-| `evidencias/publicacion_github.json` | Commit descargado de GitHub, entorno y verificación independiente |
-| `evidencias/pytest_desde_github.txt` | Salida original de las 32 pruebas ejecutadas desde esa descarga |
+| `evidencias/publicacion_github.json` | Registro histórico de la publicación inicial de 32 casos del 22/10/2026 |
+| `evidencias/pytest_desde_github.txt` | Salida histórica de los 32 casos de la publicación inicial |
 
 El umbral de cobertura es 100 % para las dos unidades pequeñas definidas en este proyecto. La cobertura se calcula sobre `swaglab/`; no representa cobertura del sitio público, de la interfaz ni de todos los posibles datos de entrada.
 
@@ -87,10 +89,10 @@ El umbral de cobertura es 100 % para las dos unidades pequeñas definidas en est
 4. Ejecutar `scripts/check_fault_detection.py` y comprobar M01 y M02 detectados.
 5. Revisar el informe Word y el video incluidos en el paquete de entrega.
 
-## Archivos de entrega
+## Archivos de la entrega anterior
 
 - [Informe Word](entrega/TI3312_Pruebas_Unitarias_LeonardoAmaury.docx)
 - [Video explicativo en español](entrega/Demostracion_Pruebas_Unitarias_Amaury.mp4)
 - [Instrucciones para revisar el repositorio](docs/publicar_en_git.md)
 
-El código y las pruebas se publican en la rama `main`. El informe y el video se encuentran en `entrega/`. Para entregar la tarea en el aula virtual, adjuntar el informe y el video e incluir el enlace de este repositorio.
+La rama `main` contiene la versión vigente de 36 casos. El informe y el video en `entrega/` conservan la entrega anterior de 32 casos; no representan una demostración de los cuatro casos añadidos. Para la actividad de unificación, el nuevo documento consolidado incluye este repositorio y la revisión exacta del código. Los registros actuales de 36 casos son `evidencias/pytest.txt`, `junit.xml` y `ejecucion.json`.

@@ -1,46 +1,50 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.7.0 -- /workspace/scratch/792c51657c83/tmp/unitarias_env/bin/python
 cachedir: .pytest_cache
-rootdir: /workspace/scratch/792c51657c83/output/Pruebas_Unitarias_SwagLabs_Amaury
+rootdir: /workspace/scratch/792c51657c83/tmp/unificacion_repo
 configfile: pyproject.toml
 testpaths: tests
 plugins: cov-7.1.0
-collecting ... collected 32 items
+collecting ... collected 36 items
 
-tests/test_cart.py::test_C01_new_cart_is_empty PASSED                    [  3%]
-tests/test_cart.py::test_C02_add_known_product PASSED                    [  6%]
-tests/test_cart.py::test_C03_duplicate_add_is_idempotent PASSED          [  9%]
-tests/test_cart.py::test_C04_add_two_distinct_products PASSED            [ 12%]
-tests/test_cart.py::test_C05_remove_last_product PASSED                  [ 15%]
-tests/test_cart.py::test_C06_remove_preserves_other_product PASSED       [ 18%]
-tests/test_cart.py::test_C07_remove_missing_product_preserves_state PASSED [ 21%]
-tests/test_cart.py::test_C08_unknown_product_is_rejected PASSED          [ 25%]
-tests/test_cart.py::test_C09_cart_instances_are_isolated PASSED          [ 28%]
-tests/test_cart.py::test_C10_money_uses_exact_decimal_arithmetic PASSED  [ 31%]
-tests/test_checkout.py::test_Q01_complete_data_are_accepted PASSED       [ 34%]
-tests/test_checkout.py::test_Q02_one_character_is_accepted PASSED        [ 37%]
-tests/test_checkout.py::test_Q03_surrounding_spaces_are_trimmed PASSED   [ 40%]
-tests/test_checkout.py::test_required_fields_decision_table[Q04_011] PASSED [ 43%]
-tests/test_checkout.py::test_required_fields_decision_table[Q05_101] PASSED [ 46%]
-tests/test_checkout.py::test_required_fields_decision_table[Q06_110] PASSED [ 50%]
-tests/test_checkout.py::test_required_fields_decision_table[Q07_001] PASSED [ 53%]
-tests/test_checkout.py::test_required_fields_decision_table[Q08_010] PASSED [ 56%]
-tests/test_checkout.py::test_required_fields_decision_table[Q09_100] PASSED [ 59%]
-tests/test_checkout.py::test_required_fields_decision_table[Q10_000] PASSED [ 62%]
-tests/test_checkout.py::test_whitespace_only_is_rejected[Q11_spaces_first] PASSED [ 65%]
-tests/test_checkout.py::test_whitespace_only_is_rejected[Q12_spaces_last] PASSED [ 68%]
-tests/test_checkout.py::test_whitespace_only_is_rejected[Q13_spaces_postal] PASSED [ 71%]
-tests/test_checkout.py::test_non_text_fields_are_rejected[Q14_type_first] PASSED [ 75%]
-tests/test_checkout.py::test_non_text_fields_are_rejected[Q15_type_last] PASSED [ 78%]
-tests/test_checkout.py::test_non_text_fields_are_rejected[Q16_type_postal] PASSED [ 81%]
-tests/test_checkout.py::test_invalid_item_count_is_rejected[Q17_zero] PASSED [ 84%]
-tests/test_checkout.py::test_invalid_item_count_is_rejected[Q18_negative] PASSED [ 87%]
-tests/test_checkout.py::test_invalid_item_count_is_rejected[Q19_boolean] PASSED [ 90%]
-tests/test_checkout.py::test_invalid_item_count_is_rejected[Q20_text] PASSED [ 93%]
-tests/test_checkout.py::test_invalid_item_count_is_rejected[Q21_float] PASSED [ 96%]
-tests/test_checkout.py::test_Q22_multiple_products_are_accepted PASSED   [100%]
+tests/test_cart.py::test_C01_new_cart_is_empty PASSED                    [  2%]
+tests/test_cart.py::test_C02_add_known_product PASSED                    [  5%]
+tests/test_cart.py::test_C03_duplicate_add_is_idempotent PASSED          [  8%]
+tests/test_cart.py::test_C04_add_two_distinct_products PASSED            [ 11%]
+tests/test_cart.py::test_C05_remove_last_product PASSED                  [ 13%]
+tests/test_cart.py::test_C06_remove_preserves_other_product PASSED       [ 16%]
+tests/test_cart.py::test_C07_remove_missing_product_preserves_state PASSED [ 19%]
+tests/test_cart.py::test_C08_unknown_product_is_rejected PASSED          [ 22%]
+tests/test_cart.py::test_C09_cart_instances_are_isolated PASSED          [ 25%]
+tests/test_cart.py::test_C10_money_uses_exact_decimal_arithmetic PASSED  [ 27%]
+tests/test_checkout.py::test_Q01_complete_data_are_accepted PASSED       [ 30%]
+tests/test_checkout.py::test_Q02_one_character_is_accepted PASSED        [ 33%]
+tests/test_checkout.py::test_Q03_surrounding_spaces_are_trimmed PASSED   [ 36%]
+tests/test_checkout.py::test_required_fields_decision_table[Q04_011] PASSED [ 38%]
+tests/test_checkout.py::test_required_fields_decision_table[Q05_101] PASSED [ 41%]
+tests/test_checkout.py::test_required_fields_decision_table[Q06_110] PASSED [ 44%]
+tests/test_checkout.py::test_required_fields_decision_table[Q07_001] PASSED [ 47%]
+tests/test_checkout.py::test_required_fields_decision_table[Q08_010] PASSED [ 50%]
+tests/test_checkout.py::test_required_fields_decision_table[Q09_100] PASSED [ 52%]
+tests/test_checkout.py::test_required_fields_decision_table[Q10_000] PASSED [ 55%]
+tests/test_checkout.py::test_whitespace_only_is_rejected[Q11_spaces_first] PASSED [ 58%]
+tests/test_checkout.py::test_whitespace_only_is_rejected[Q12_spaces_last] PASSED [ 61%]
+tests/test_checkout.py::test_whitespace_only_is_rejected[Q13_spaces_postal] PASSED [ 63%]
+tests/test_checkout.py::test_non_text_fields_are_rejected[Q14_type_first] PASSED [ 66%]
+tests/test_checkout.py::test_non_text_fields_are_rejected[Q15_type_last] PASSED [ 69%]
+tests/test_checkout.py::test_non_text_fields_are_rejected[Q16_type_postal] PASSED [ 72%]
+tests/test_checkout.py::test_invalid_item_count_is_rejected[Q17_zero] PASSED [ 75%]
+tests/test_checkout.py::test_invalid_item_count_is_rejected[Q18_negative] PASSED [ 77%]
+tests/test_checkout.py::test_invalid_item_count_is_rejected[Q19_boolean] PASSED [ 80%]
+tests/test_checkout.py::test_invalid_item_count_is_rejected[Q20_text] PASSED [ 83%]
+tests/test_checkout.py::test_invalid_item_count_is_rejected[Q21_float] PASSED [ 86%]
+tests/test_checkout.py::test_Q22_multiple_products_are_accepted PASSED   [ 88%]
+tests/test_diseno_adicional.py::test_C11_remove_from_empty_cart PASSED   [ 91%]
+tests/test_diseno_adicional.py::test_C12_readd_after_removal PASSED      [ 94%]
+tests/test_diseno_adicional.py::test_Q23_quantity_error_has_priority PASSED [ 97%]
+tests/test_diseno_adicional.py::test_Q24_postal_leading_zeros_are_preserved PASSED [100%]
 
-- generated xml file: /workspace/scratch/792c51657c83/output/Pruebas_Unitarias_SwagLabs_Amaury/evidencias/junit.xml -
+- generated xml file: /workspace/scratch/792c51657c83/tmp/unificacion_repo/evidencias/junit.xml -
 ================================ tests coverage ================================
 _______________ coverage: platform linux, python 3.12.14-final-0 _______________
 
@@ -54,4 +58,4 @@ TOTAL                    56      0     14      0  100.00%
 Coverage HTML written to dir evidencias/coverage_html
 Coverage JSON written to file evidencias/coverage.json
 Required test coverage of 100.0% reached. Total coverage: 100.00%
-============================== 32 passed in 0.11s ==============================
+============================== 36 passed in 0.15s ==============================

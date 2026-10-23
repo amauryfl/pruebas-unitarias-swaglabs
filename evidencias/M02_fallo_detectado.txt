@@ -1,7 +1,7 @@
 ============================= test session starts ==============================
 platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.7.0 -- /workspace/scratch/792c51657c83/tmp/unitarias_env/bin/python
 cachedir: .pytest_cache
-rootdir: /tmp/swaglab_mutation_yytbgps1
+rootdir: /tmp/swaglab_mutation_29zemtan
 configfile: pyproject.toml
 collecting ... collected 1 item
 
@@ -33,4 +33,4 @@ E       Failed: DID NOT RAISE ValueError
 tests/test_checkout.py:42: Failed
 =========================== short test summary info ============================
 FAILED tests/test_checkout.py::test_required_fields_decision_table[Q05_101]
-============================== 1 failed in 0.03s ===============================
+============================== 1 failed in 0.02s ===============================

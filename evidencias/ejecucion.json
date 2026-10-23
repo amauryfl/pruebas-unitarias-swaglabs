@@ -1,6 +1,6 @@
 {
-  "started_utc": "2026-10-22T14:14:02.611747+00:00",
-  "finished_utc": "2026-10-22T14:14:02.998946+00:00",
+  "started_utc": "2026-10-23T18:31:45.631368+00:00",
+  "finished_utc": "2026-10-23T18:31:46.049979+00:00",
   "python": "3.12.14",
   "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
   "command": [
@@ -25,9 +25,10 @@
     "swaglab/checkout.py": "ac36ece3a9e34434566224aa1b7d838921f44b526f247b61483296cf68c9e25b",
     "tests/conftest.py": "a2bd27f9fbfa61c21ff6ee5f42f6db463507294989b640acfb5b4433ccbe9bfa",
     "tests/test_cart.py": "6e83cae7be7b97ce310f6e27560d2a7a0659adee0a4b3ce84ca5cb3150314b90",
-    "tests/test_checkout.py": "b17ebb79766320a8605badb6a87b2f4bdf202223339304f70ff8ad3480d4c5a5"
+    "tests/test_checkout.py": "b17ebb79766320a8605badb6a87b2f4bdf202223339304f70ff8ad3480d4c5a5",
+    "tests/test_diseno_adicional.py": "a979d0b4e509cbb3fdb43e8ddf916e52af78de816adaf58a856494d9408a31a4"
   },
-  "tests": 32,
+  "tests": 36,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
